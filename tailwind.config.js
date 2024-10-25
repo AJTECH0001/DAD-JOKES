@@ -7,9 +7,18 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        "person-background":
+          "linear-gradient(to bottom, #FEFAF6 0%, #FEFAF6 40%, #8b4513 40%, #8b4513 45%, #DAC8A3 45%, #DAC0A3 100%)",
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primaryDark: "#102057",
+        secondaryDark: "#DACBA3",
+        secondaryLight: "#EADBC8",
+        primaryLight: "#FEFAF6",
+      },
+      fontFamily: {
+        sans: ["Comic Neue", "sans-serif"],
       },
     },
   },
