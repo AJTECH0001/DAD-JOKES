@@ -6,12 +6,38 @@ import React, { useState, useEffect } from "react";
 import { ConnectWalletClient, ConnectPublicClient } from "@/lib/client";
 import { getContract } from "viem";
 import dadJokesABI from "@/lib/dadJokesABI.json";
+
+import { useVote } from "@/hooks/useVote";
+import RewardSection from "@/components/RewardSection";
+
+import { useWithdraw } from "@/hooks/useWithdraw";
+import WithdrawSection from "@/components/WithdrawSection";
+
+import { useSubmitJoke } from "@/hooks/useSubmitJoke";
+import JokeModal from "@/components/JokeModal";
+
 // Component to display the wallet status (connected or disconnected)
-export default function WalletButton() {
+export default function WalletButton({ index }) {
   const [publicClient, setPublicClient] = useState(null);
   const [walletClient, setWalletClient] = useState(null);
   const [dadJokesContract, setDadJokesContract] = useState(null);
+
   const { address, balance, handleClick } = useWallet(dadJokesContract);
+  const { handleVote } = useVote(dadJokesContract, walletClient, publicClient);
+  const { handleWithdraw } = useWithdraw(
+    dadJokesContract,
+    walletClient,
+    publicClient
+  );
+
+  const { isModalOpen, setIsModalOpen, handleSubmit } = useSubmitJoke(
+    dadJokesContract,
+    walletClient,
+    publicClient
+  );
+
+  const [setup, setSetup] = useState("");
+  const [punchline, setPunchline] = useState("");
 
   useEffect(() => {
     const initializeClients = async () => {
@@ -30,7 +56,7 @@ export default function WalletButton() {
   useEffect(() => {
     if (publicClient && walletClient) {
       const dadJokesContract = getContract({
-        address: "0xe43e44f3f538Ad10292C5FBE52542aB0D7740599",
+        address: "0x0228C786A3A7d55C8f70433722FFCEcCb7a62D80",
         abi: dadJokesABI,
         client: { public: publicClient, wallet: walletClient },
       });
@@ -41,11 +67,34 @@ export default function WalletButton() {
 
   if (!address) {
     // If no address is provided, display "Disconnected" status
-    return <ConnectButton Button handleClick={handleClick} />;
+    return <ConnectButton handleClick={handleClick} />;
   }
   return (
     <>
-      <div>Connected</div>
+      <RewardSection index={index} handleVote={handleVote} />
+
+      <div className="mt-6 flex items-center w-full bg-gray-800 bg-opacity-25 p-4 rounded ">
+        <div className="flex items-center justify-center w-full">
+          <WithdrawSection handleWithdraw={handleWithdraw} balance={balance} />
+          <button
+            className="bg-primaryDark text-primaryLight font-sans px-4 py-2 rounded"
+            onClick={() => setIsModalOpen(true)}
+          >
+            Add Joke
+          </button>
+        </div>
+        <JokeModal
+          {...{
+            isModalOpen,
+            setIsModalOpen,
+            handleSubmit,
+            setup,
+            setSetup,
+            punchline,
+            setPunchline,
+          }}
+        />
+      </div>
     </>
   );
 }

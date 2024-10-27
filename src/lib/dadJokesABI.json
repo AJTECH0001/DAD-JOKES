@@ -1,5 +1,36 @@
 [
   {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_setup",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_punchline",
+        "type": "string"
+      }
+    ],
+    "name": "addJoke",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "jokeId",
+        "type": "uint256"
+      }
+    ],
+    "name": "deleteJoke",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "stateMutability": "nonpayable",
     "type": "constructor"
@@ -39,7 +70,7 @@
         "type": "address"
       }
     ],
-    "name": "jokeAdded",
+    "name": "JokeAdded",
     "type": "event"
   },
   {
@@ -48,11 +79,11 @@
       {
         "indexed": true,
         "internalType": "uint256",
-        "name": "jokedId",
+        "name": "jokeId",
         "type": "uint256"
       }
     ],
-    "name": "jokeDeleted",
+    "name": "JokeDeleted",
     "type": "event"
   },
   {
@@ -77,23 +108,30 @@
         "type": "uint256"
       }
     ],
-    "name": "jokeRewarded",
+    "name": "JokeRewarded",
     "type": "event"
   },
   {
     "inputs": [
       {
-        "internalType": "string",
-        "name": "_setup",
-        "type": "string"
+        "internalType": "uint256",
+        "name": "jokeId",
+        "type": "uint256"
       },
       {
-        "internalType": "string",
-        "name": "_punchline",
-        "type": "string"
+        "internalType": "uint8",
+        "name": "_rewardType",
+        "type": "uint8"
       }
     ],
-    "name": "addJoke",
+    "name": "rewardJoke",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "withdrawBalance",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -106,7 +144,7 @@
         "type": "address"
       }
     ],
-    "name": "creatorBalance",
+    "name": "creatorBalances",
     "outputs": [
       {
         "internalType": "uint256",
@@ -115,19 +153,6 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "jokeId",
-        "type": "uint256"
-      }
-    ],
-    "name": "deleteJoke",
-    "outputs": [],
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -163,31 +188,6 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "jokeId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint8",
-        "name": "_rewardType",
-        "type": "uint8"
-      }
-    ],
-    "name": "rewardJoke",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "withdrawBalance",
-    "outputs": [],
-    "stateMutability": "nonpayable",
     "type": "function"
   }
 ]

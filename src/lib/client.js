@@ -1,38 +1,30 @@
 import { createWalletClient, createPublicClient, custom, http } from "viem";
 import { sepolia } from "viem/chains";
-import "viem/window";
 
 export async function ConnectWalletClient() {
-  // Check for window.ethereum
-  // window.ethereum is an object provided by MetaMask or other web3 wallets
-  let transport;
+  // Check if we're in a browser environment and if MetaMask is installed
+  if (typeof window !== "undefined" && window.ethereum) {
+    const transport = custom(window.ethereum);
 
-  if (typeof window === "undefined" && window.ethereum) {
-    // If window.ethereum exists, create a custom transport using it
-    transport = custom(window.ethereum);
+    // Create the wallet client with the Sepolia chain and custom transport
+    const walletClient = createWalletClient({
+      chain: sepolia,
+      transport: transport,
+    });
+
+    return walletClient;
   } else {
+    console.warn("MetaMask not detected");
     return null;
   }
-
-  // Declare a wallet Client
-  // This creates a wallet client using the Sepolia chain and the custom transport
-  const walletClient = createWalletClient({
-    chain: sepolia,
-    transport: transport,
-  });
-
-  // return wallet client
-  return walletClient;
 }
 
 export function ConnectPublicClient() {
-  // Declare a Public Client
-  // This creates a public client using the Sepolia chain and an HTTP transport
+  // Create the public client for Sepolia using HTTP transport
   const publicClient = createPublicClient({
-    chain: "sepolia",
+    chain: sepolia,
     transport: http("https://rpc.sepolia.org"),
   });
 
-  // Return The public client
   return publicClient;
 }

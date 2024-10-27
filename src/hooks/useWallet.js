@@ -17,7 +17,7 @@ export function useWallet(dadJokesContract) {
         setBalance(formatEther(BigInt(balance)));
       }
     } catch (error) {
-      alert("Transaction failed: ${error}");
+      alert(`Transaction failed: ${error.message}`);
     }
   }
   return { address, balance, handleClick };

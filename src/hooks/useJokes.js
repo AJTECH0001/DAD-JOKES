@@ -7,7 +7,7 @@ import dadJokesABI from "@/lib/dadJokesABI.json";
 
 const publicClient = ConnectPublicClient();
 const dadJokesContract = getContract({
-  address: "0xe43e44f3f538Ad10292C5FBE52542aB0D7740599",
+  address: "0x0228C786A3A7d55C8f70433722FFCEcCb7a62D80",
   abi: dadJokesABI,
   client: { public: publicClient },
 });
