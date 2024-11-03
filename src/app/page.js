@@ -13,13 +13,13 @@ const Page = () => {
 
   const handlePreviousJoke = () => {
     setCurrentJokeIndex((prevIndex) => {
-      prevIndex = prevIndex === 0 ? jokes.length - 1 : prevIndex - 1;
+      return prevIndex === 0 ? jokes.length - 1 : prevIndex - 1;
     });
   };
 
   const handleNextJoke = () => {
     setCurrentJokeIndex((prevIndex) => {
-      prevIndex = prevIndex === jokes.length - 1 ? 0 : prevIndex + 1;
+      return prevIndex === jokes.length - 1 ? 0 : prevIndex + 1;
     });
   };
 

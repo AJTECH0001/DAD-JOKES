@@ -5,11 +5,10 @@ export function useSubmitJoke(walletClient, dadJokesContract) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSubmit = async (setup, punchline) => {
-    // Retrieve the wallet address using the Wallet Client
-    const [address] = await walletClient.requestAddresses();
-    await walletClient.switchChain({ id: sepolia.id });
-
     try {
+      const address = await walletClient.getAddress();
+      await walletClient.switchChain({ id: sepolia.id });
+
       const tx = await walletClient.writeContract({
         address: dadJokesContract.address,
         abi: dadJokesContract.abi,

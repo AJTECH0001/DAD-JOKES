@@ -8,7 +8,7 @@ const WithdrawSection = ({ balance, handleWithdraw }) => {
             className="bg-primaryDark text-primaryLight font-sans px-4 py-2 rounded"
             onClick={() => handleWithdraw()}
           >
-            Cash Out
+            &#129297; Cash Out
           </button>
         </div>
       )}

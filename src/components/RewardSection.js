@@ -11,19 +11,19 @@ const RewardSection = ({ index, handleVote }) => {
           className="text-5xl focus:outline-none"
           onClick={() => handleVote(index, 0)}
         >
-          hhh
+          &#128518;
         </button>
         <button
           className="text-5xl focus:outline-none"
           onClick={() => handleVote(index, 1)}
         >
-          kkk
+          &#129315;
         </button>
         <button
           className="text-5xl focus:outline-none"
           onClick={() => handleVote(index, 2)}
         >
-          lll
+          &#128555;
         </button>
       </div>
     </>
